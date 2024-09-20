@@ -1,0 +1,39 @@
+/* Estilos Generales */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+}
+
+.auth-links a {
+    color: white;
+    margin-left: 10px;
+}
+
+/* Carrusel */
+.carousel img {
+    height: 500px; /* Ajusta esta altura según tus necesidades */
+    object-fit: cover;
+}
+
+.info-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.info-section p {
+    font-size: 1.2em;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Pie de página */
+footer a {
+    font-size: 1.5em;
+}
+
+footer a:hover {
+    color: #3498db;
+}
