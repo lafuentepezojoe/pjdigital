@@ -21,7 +21,11 @@
                     @if (Route::has('login'))
                         <div class="auth-links">
                             @auth
-                                <a href="{{ url('/home') }}" class="btn btn-primary me-2">Home</a>
+                                <a href="{{ url('dashboard') }}" class="btn btn-primary me-2">Panel</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit">Cerrar sesión</button>
+                                </form>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
                                 @if (Route::has('register'))

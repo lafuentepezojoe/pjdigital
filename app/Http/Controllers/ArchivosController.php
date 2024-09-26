@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\carpetas;
+use App\Models\archivos;
 use Illuminate\Http\Request;
 
-class CarpetasController extends Controller
+class ArchivosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class CarpetasController extends Controller
      */
     public function create()
     {
-        return view('panel.carpetas.create');
+        //
     }
 
     /**

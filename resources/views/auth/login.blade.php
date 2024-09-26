@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <title>LOGIN-ARCHIVO</title>
         <!-- Required meta tags -->
@@ -21,7 +21,7 @@
     </head>
 
     <body>
-    <form action="/login" method="POST" class="login-form">
+    <form method="POST" action="{{ route('login') }}">@csrf
     <div class="login-container">
         <!-- Imagen al costado -->
         <div class="image-side">
@@ -33,12 +33,12 @@
             <h2>Inicia Sesión</h2>
             <div class="input-group">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="Usuario" required>
+                <input id="email" type="email" name="email" required autofocus />
             </div>
             <div class="input-group">
                 <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Contraseña" required>
-            </div>
+                <input id="password" type="password" name="password" required />
+                </div>
             <button type="submit" class="login-btn">Iniciar Sesión</button>
             <p class="signup-text">¿No tienes cuenta? <a href="/register">Regístrate</a></p>
         </div>

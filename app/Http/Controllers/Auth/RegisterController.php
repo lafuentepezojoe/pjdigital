@@ -7,20 +7,10 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
     /**
@@ -28,7 +18,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/home'; // Redirige a donde prefieras
 
     /**
      * Create a new controller instance.
@@ -58,15 +48,24 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  \Illuminate\Http\Request  $request
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function store(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        // Validar los datos enviados
+        $validatedData = $this->validator($request->all())->validate();
+
+        // Crear el nuevo usuario
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
         ]);
+
+        // Cierra la sesión y redirige al login
+        $this->guard()->logout();
+        return redirect('/login')->with('success', 'Tu registro fue exitoso. Por favor, inicia sesión.');
     }
 }
+

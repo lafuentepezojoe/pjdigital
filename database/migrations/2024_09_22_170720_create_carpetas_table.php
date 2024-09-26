@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('carpetas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombres', 150)->nullable()->default('');
-            $table->timestamp('create_fecha')->nullable()->userCurrent();
-            $table->bigInteger('users')->unsigned();
+            $table->string('nombre', 150)->nullable()->default('');
+            $table->string('sede', 150)->nullable()->default('');
+            $table->string('numero_almacen', 150)->nullable()->default('');
+            $table->string('numero_estante', 150)->nullable()->default('');
+            $table->string('anho', 150)->nullable()->default('');
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
