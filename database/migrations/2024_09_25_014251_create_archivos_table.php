@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nombres', 200)->nullable()->default('');
             $table->string('apellidos', 200)->nullable()->default('');
             $table->string('tipo', 150)->nullable()->default('');
+            $table->string('archivo', 250)->nullable()->default('');
             $table->bigInteger('carpeta_id')->unsigned();
             $table->foreign('carpeta_id')->references('id')->on('carpetas')->onDelete('cascade');
             $table->timestamps();
