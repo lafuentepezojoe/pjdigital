@@ -17,8 +17,8 @@
 
                 <input type="text" value="{{$id_carpeta}}">
 
-                <label for="nombre">Nombre de Archivo</label>
-                <input type="text" name="nombre_Archivo" class="form-control form-control-sm">
+                <label for="nombre_archivo">Nombre de Archivo</label>
+                <input type="text" name="nombre_archivo" class="form-control form-control-sm">
             </div>
             <div class="col-md-4">
                 <label for="archivo">Seleccione el archivo</label>
@@ -40,8 +40,8 @@
             </div>
 
             <div class="col-md-4">
-                <label for="apellido">Apellidos</label>
-                <input type="text" name="apellido" class="form-control form-control-sm">
+                <label for="apellidos">Apellidos</label>
+                <input type="text" name="apellidos" class="form-control form-control-sm">
             </div>
             <div class="col-md-4">
                 <label for="tipo">Tipo</label>

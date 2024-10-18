@@ -14,8 +14,8 @@
             <div class="col-md-4">
                 <input type="text" name="archivo_id" value="{{$archivo->id}}" class="form-control form-control-sm" hidden>
 
-                <label for="nombre">Nombre de Archivo</label>
-                <input type="text" name="nombre_Archivo" value="{{$archivo->nombre_archivo}}" class="form-control form-control-sm">
+                <label for="Archivo">Nombre de Archivo</label>
+                <input type="text" name="Archivo" value="{{$archivo->nombre_archivo}}" class="form-control form-control-sm">
             </div>
             
             <div class="col-md-4">

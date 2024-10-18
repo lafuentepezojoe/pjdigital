@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarpetasController;
 use App\Http\Controllers\ArchivosController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UsuarioController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,3 +46,14 @@ Route::post('/archivo/update', [ArchivosController::class, 'update'])->name('arc
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
+
+//Usuarios
+Route::get('/usuarios/index', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::get('/usuarios/edit/{id}', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+Route::post('/usuarios/update/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
+Route::post('/usuarios/store', [UsuarioController::class, 'store'])->name('usuarios.store');
+Route::delete('/usuarios/destroy/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+
+//password reset
+Route::post('/usuarios/passwrod/reset/{id}', [UsuarioController::class, 'password_reset'])->name('usuarios.password.reset');
+Route::post('/usuarios/reset-password/{id}', [UsuarioController::class, 'password_reset'])->name('usuarios.resetPassword');
