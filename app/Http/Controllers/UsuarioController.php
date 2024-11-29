@@ -16,9 +16,10 @@ class UsuarioController extends Controller
     }
     
 
-    public function password_reset(Request $request, $id)
+    public function password_reset(Request $request)
 {
     // Validar la contraseña ingresada
+    $id=$request->input('id_usuario');
     $request->validate([
         'password' => 'required|string|max:255',
     ]);
@@ -61,6 +62,7 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         $usuario = User::findOrFail($id);
+        // dd($usuario);
         return view('panel.usuarios.edit', compact('usuario'));
     }
 
@@ -74,16 +76,17 @@ class UsuarioController extends Controller
             'telefono' => 'string|max:255',
             'direccion' => 'string|max:255',
             'rol' => 'string|max:255',
-
+            'status' => 'required|in:0,1', // Asegura que solo sea 0 o 1
         ]);
+        
 
-        $usuario->update($request->only('name','apellidos','telefono','direccion','rol'));
+        $usuario->update($request->only('name','apellidos','telefono','direccion','rol','status'));
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
     }
 
     public function destroy($id)
-    {
+    {   
         User::findOrFail($id)->delete();
         return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente.');
     }

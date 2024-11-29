@@ -28,9 +28,9 @@
                                 </form>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
-                                @if (Route::has('register'))
+                                {{-- @if (Route::has('register'))
                                     <a href="{{ route('register') }}" class="btn btn-outline-light">Regístrate</a>
-                                @endif
+                                @endif --}}
                             @endauth
                         </div>
                     @endif

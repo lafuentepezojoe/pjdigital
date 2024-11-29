@@ -8,19 +8,21 @@
     </div>
     @endif
 
-    <form action="{{route('archivo.update', $archivo->id)}}" method="POST">@csrf
+    <form action="{{route('archivo.update', $archivo->id)}}" method="POST" enctype="multipart/form-data">@csrf
         <h5>Formulario Editar Archivo</h5>
         <div class="row">
             <div class="col-md-4">
                 <input type="text" name="archivo_id" value="{{$archivo->id}}" class="form-control form-control-sm" hidden>
 
-                <label for="Archivo">Nombre de Archivo</label>
-                <input type="text" name="Archivo" value="{{$archivo->nombre_archivo}}" class="form-control form-control-sm">
+                <label for="nombre_archivo">Nombre de Archivo</label>
+                <input type="text" name="nombre_archivo" value="{{$archivo->nombre_archivo}}" class="form-control form-control-sm">
+                
             </div>
             
             <div class="col-md-4">
                 <label for="archivo">Seleccione el archivo</label>
                 <input type="file" name="archivo" value="{{$archivo->numero_resolucion}}" class="form-control form-control-sm">            
+                <a href="{{ asset('storage/archivos/' . $archivo->archivo) }}" download>{{ $archivo->nombre_archivo }}</a>
             </div>
 
             <div class="col-md-4">
@@ -41,6 +43,11 @@
             <div class="col-md-2">
                 <label for="apellidos ">Apellidos</label>
                 <input type="text" name="apellidos" value="{{$archivo->apellidos}}" class="form-control form-control-sm">
+            </div>
+
+            <div class="col-md-2">
+                <label for="dni">Dni</label>
+                <input type="text" name="dni" value="{{$archivo->dni}}" class="form-control form-control-sm">
             </div>
 
             <div class="col-md-4">

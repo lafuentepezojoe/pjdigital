@@ -23,13 +23,17 @@
             </div>
 
             <div class="col-md-2">
-                <label for="numero_almacen">Número Almacén</label>
+                <label for="numero_almacen">Número Ambiente</label>
                 <input type="number" name="numero_almacen" value="{{$carpeta->numero_almacen}}" class="form-control form-control-sm">
         
             </div>
             <div class="col-md-2">
                 <label for="numero_estante">Número Estante</label>
                 <input type="number" name="numero_estante" value="{{$carpeta->numero_estante}}" class="form-control form-control-sm">
+            </div>
+            <div class="col-md-2">
+                <label for="seccion" class="form-label">Seccion</label>
+                <input type="text" name="seccion" value="{{$carpeta->seccion}}" class="form-control form-control-sm" placeholder="A, B, C" required>
             </div>
 
             <div class="col-md-4">

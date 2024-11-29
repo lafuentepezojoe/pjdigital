@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\solicitudes;
 
 class HomeController extends Controller
 {
@@ -25,4 +26,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function dashboard()
+    {
+
+        $solicitudes=solicitudes::where('estado',0)->get()->count();
+        // dd($solicitudes);
+        return view('panel.dashboard',compact('solicitudes'));
+    }
+
+
 }

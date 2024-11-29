@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\carpetas;
+use App\Models\solicitudes;
 use Illuminate\Http\Request;
 
 class CarpetasController extends Controller
@@ -20,8 +21,35 @@ class CarpetasController extends Controller
      */
     public function create()
     {
-        $carpetas = Carpetas::orderBy('id', 'desc')->get();
-        return view('panel.carpetas.create',compact('carpetas'));
+        // $carpetas = Carpetas::orderBy('id', 'desc')->get();
+        // $solicitudes_carpetas=solicitudes::where('estado',1)
+        // ->where('recurso','carpeta')
+        // ->where('user_id',auth()->id())
+        // ->get();
+
+        // return view('panel.carpetas.create',compact('carpetas','solicitudes_carpetas'));
+
+        $carpetas = Carpetas::orderBy('id', 'desc')->paginate(2);
+        $solicitudes_carpetas = solicitudes::where('estado', 1)
+            ->where('recurso', 'carpeta')
+            ->where('user_id', auth()->id())
+            ->get();
+            // Asignar una columna adicional en carpetas si existe una solicitud correspondiente
+            foreach ($carpetas as $carpeta) {
+                $solicitud = $solicitudes_carpetas->firstWhere('id_recurso', $carpeta->id);
+                $carpeta->solicitud = $solicitud ? $solicitud->id : null; // Agrega el ID de solicitud o null
+                $carpeta->accion = $solicitud ? $solicitud->accion : null; // Agrega la acción de la solicitud o null
+                $carpeta->estado = $solicitud ? $solicitud->estado : null; // Agrega el estado de la solicitud o null
+            }
+            
+            // dd($carpetas);
+            
+            
+        
+        return view('panel.carpetas.create', compact('carpetas', 'solicitudes_carpetas'));
+
+
+
     }
 
     /**
@@ -35,7 +63,8 @@ class CarpetasController extends Controller
         $carpeta->numero_almacen=request('numero_almacen');
         $carpeta->numero_estante=request('numero_estante');
         $carpeta->anho=request('anho');
-        $carpeta->user_id=auth()->id();;
+        $carpeta->seccion=request('seccion');
+        $carpeta->user_id=auth()->id();
         $carpeta->save();
 
         
@@ -74,6 +103,7 @@ class CarpetasController extends Controller
         $carpeta->numero_almacen=request('numero_almacen');
         $carpeta->numero_estante=request('numero_estante');
         $carpeta->anho=request('anho');
+        $carpeta->seccion=request('seccion');
         $carpeta->user_id=auth()->id();;
         $carpeta->save();
 
@@ -84,11 +114,25 @@ class CarpetasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id_carpeta)
+    public function destroy(Request $request)
     {
+        $id_carpeta=$request->input('id_carpeta_eliminar');
         $carpeta = carpetas::find($id_carpeta);
         $carpeta->delete();
 
-        return redirect()->route('carpeta.create');
+        if (!$carpeta) {
+            return redirect()->back()->with('error', 'Carpeta no encontrado.');
+        }
+
+        //actualizar el campo de estado a 2
+        $solicitud = solicitudes::where('id_recurso', $id_carpeta)->first();
+
+        if ($solicitud) {
+        $solicitud->estado = 2;
+        $solicitud->save();
+        }
+
+
+        return redirect()->route('carpeta.create')->with('success', 'Carpeta eliminado correctamente.');
     }
 }
