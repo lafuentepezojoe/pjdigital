@@ -335,20 +335,20 @@
             </a>
             
               <a href="{{ route('carpeta.create') }}" 
-                class="btn w-70 mb-2 btn-crear-carpeta">
-                  Crear Carpeta
+              class="btn w-70 mb-2 btn-crear-carpeta d-flex align-items-center">
+                <i class="fas fa-folder-plus me-2"></i><span>Crear Carpeta</span>
               </a>
             
             
             <!-- Links del menú con animación -->
             <a href="{{route('solicitudes.carpetayarchivos')}}" 
               class="btn w-70 mb-2 d-flex align-items-center menu-link">
-                <i class="fas fa-cogs me-2"></i> <span>Carpetas y Archivos</span>
+                <i class="fas fa-folder-open me-2"></i> <span>Carpetas y Archivos</span>
             </a>
             @if (auth()->user()->rol === 'admin' or auth()->user()->rol === 'secretario' )
               <a href="{{route('solicitudes.index')}}" 
                 class="btn w-70 mb-2 d-flex align-items-center menu-link">
-                  <i class="fas fa-cogs me-2"></i> <span>Solicitudes</span>
+                  <i class="fas fa-envelope-open-text me-2"></i> <span>Solicitudes</span>
               </a>
             
               <a href="{{route('usuarios.index')}}" 
@@ -404,11 +404,11 @@
 .badge {
     font-size: 0.9rem;
     font-weight: bold;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     padding: 0.4rem;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     transform: scale(1);
-    animation: pop 0.5s ease-in-out infinite;
+    /* animation: pop 0.8s ease-in-out infinite; */
 }
 
 @keyframes pop {
